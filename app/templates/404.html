@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center">
+
+<div class="text-center bg-gray-950 border border-yellow-500 rounded-2xl p-10">
+    <h1 class="text-8xl font-bold text-yellow-400 mb-4">404</h1>
+    <p class="text-gray-300 mb-6">Página no encontrada.</p>
+    <a href="{{ url_for('inicio') }}"
+    class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold">
+        Volver al catálogo
+    </a>
+</div>
+
+</body>
+</html>

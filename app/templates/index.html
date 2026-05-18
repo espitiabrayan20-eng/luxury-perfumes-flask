@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Perfumes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+
+<header class="bg-black border-b border-yellow-500 py-8 text-center">
+    <h1 class="text-5xl font-bold text-yellow-400">Luxury Perfumes</h1>
+    <a href="{{ url_for('ver_carrito') }}"
+    class="mt-4 inline-block bg-yellow-500 text-black px-5 py-2 rounded-lg font-bold">
+        🛒 Ver carrito
+    </a>
+</header>
+
+<section class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {% for producto in productos %}
+        <div class="bg-gray-950 border border-yellow-500 rounded-2xl overflow-hidden shadow-2xl">
+            <img src="{{ url_for('static', filename=producto.imagen) }}"
+                class="w-full h-72 object-cover">
+
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-yellow-400 mb-2">
+                    {{ producto.nombre }}
+                </h2>
+
+                <p class="text-yellow-300 text-xl font-bold mb-3">
+                    ${{ "{:,.0f}".format(producto.precio) }}
+                </p>
+
+                <p class="text-gray-300 mb-4">
+                    {{ producto.descripcion[:80] }}...
+                </p>
+
+                <div class="space-y-3">
+                    <a href="{{ url_for('detalle_producto', id=producto.id) }}"
+                    class="block w-full text-center bg-yellow-500 text-black py-2 rounded-lg font-bold">
+                        Ver más
+                    </a>
+
+                    <a href="{{ url_for('agregar_carrito', id=producto.id) }}"
+                    class="block w-full text-center bg-white text-black py-2 rounded-lg font-bold">
+                        Agregar al carrito
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+</body>
+</html>

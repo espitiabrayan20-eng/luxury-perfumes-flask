@@ -1,0 +1,66 @@
+<!-- templates/comprobante.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobante de Compra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+
+<div class="container mx-auto px-4 py-12 max-w-3xl">
+    <div class="bg-gray-950 border border-yellow-500 rounded-2xl p-8 shadow-2xl">
+
+        <h1 class="text-4xl font-bold text-yellow-400 mb-6 text-center">
+            Comprobante de Compra
+        </h1>
+
+        <p class="mb-2">
+            <strong>Número:</strong> #{{ comprobante.numero }}
+        </p>
+
+        <p class="mb-2">
+            <strong>Fecha:</strong> {{ comprobante.fecha }}
+        </p>
+
+        <hr class="my-6 border-yellow-500">
+
+        {% for item in comprobante["items"] %}
+        <div class="flex justify-between mb-2">
+            <span>
+                {{ item.nombre }} x{{ item.cantidad }}
+            </span>
+            <span>
+                ${{ "{:,.0f}".format(item.precio * item.cantidad) }}
+            </span>
+        </div>
+        {% endfor %}
+
+        <hr class="my-6 border-yellow-500">
+
+        <h2 class="text-3xl font-bold text-yellow-300 text-right">
+            Total: ${{ "{:,.0f}".format(comprobante.total) }}
+        </h2>
+
+        <div class="mt-8 text-center space-x-4">
+            <button
+                onclick="window.print()"
+                class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold"
+            >
+                Imprimir
+            </button>
+
+            <a
+                href="{{ url_for('inicio') }}"
+                class="bg-white text-black px-6 py-3 rounded-lg font-bold inline-block"
+            >
+                Volver a la tienda
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+
+<div class="container mx-auto px-4 py-12">
+    <h1 class="text-5xl font-bold text-yellow-400 mb-8 text-center">Tu Carrito</h1>
+
+    {% if carrito %}
+        <div class="space-y-4">
+            {% for item in carrito %}
+            <div class="bg-gray-950 border border-yellow-500 rounded-xl p-4 flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold text-yellow-400">{{ item.nombre }}</h2>
+                    <p>Cantidad: {{ item.cantidad }}</p>
+                    <p>$ {{ "{:,.0f}".format(item.precio * item.cantidad) }}</p>
+                </div>
+
+                <a href="{{ url_for('eliminar_del_carrito', id=item.id) }}"
+                class="bg-red-600 px-4 py-2 rounded-lg">
+                    Eliminar
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 text-right">
+            <h2 class="text-3xl font-bold text-yellow-300">
+                Total: ${{ "{:,.0f}".format(total) }}
+            </h2>
+        </div>
+
+        <div class="mt-8 flex gap-4 justify-end">
+            <a href="{{ url_for('vaciar_carrito') }}"
+            class="bg-gray-700 px-6 py-3 rounded-lg">
+                Vaciar carrito
+            </a>
+
+            <a href="{{ url_for('comprar') }}"
+            class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold">
+                Finalizar compra
+            </a>
+        </div>
+    {% else %}
+        <p class="text-center text-gray-400 text-xl">Tu carrito está vacío.</p>
+    {% endif %}
+
+    <div class="mt-8 text-center">
+        <a href="{{ url_for('inicio') }}" class="text-yellow-400 underline">
+            Seguir comprando
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
